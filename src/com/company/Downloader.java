@@ -1,23 +1,35 @@
 package com.company;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Properties;
 
 public class Downloader {
 
-    private static final String defaultFolder = "E:\\temp\\music\\";
     private static File targetFile;
     private static String successMessage = "Download completed!";
     private static String failureMessage = "Download failed!";
+
+    public static String loadDefaultFolder() {
+        Properties properties = new Properties();
+        try {
+            properties.load(new FileInputStream("configuration.properties"));
+            return properties.getProperty("defaultFolder");
+        } catch (IOException e) {
+            System.out.println("Can't read defaultFolder configuration from configuration.properties");
+        }
+        return null;
+    }
 
     public static void downloadFile(final String fileName, final String link, final JButtonDownload jButtonDownload) {
 
         jButtonDownload.setEnabled(false);
 
         final String buttonText = jButtonDownload.getText();
-        targetFile = new File(defaultFolder + fileName);
+        targetFile = new File(loadDefaultFolder() + fileName);
 
         try {
             final URL url = new URL(link);

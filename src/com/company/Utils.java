@@ -8,9 +8,6 @@ import org.json.simple.parser.ParseException;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 class Utils {
